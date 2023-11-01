@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 import mongoose from "mongoose";
-import appConfig from "./common/config/app_config.js";
+import appConfig from "./common/config/app.config.js";
 import databaseConfig from './common/config/database.config.js';
 import { errorHandler } from "./common/services/healper.js";
 import { ApiError } from "./common/utilities/apiError.js";
@@ -10,11 +10,13 @@ import { CategoryController } from "./modules/categories/category.controller.js"
 import { CategoryService } from "./modules/categories/category.service.js";
 import UsersController from "./modules/users/users.controller.js";
 import UsersService from "./modules/users/users.service.js";
+import AuthController from "./modules/auth/auth.controller.js";
+import AuthService from "./modules/auth/auth.service.js";
 
 class App {
   private app = express();
   private port = appConfig.port;
-  private controllers = [new CategoryController(new CategoryService()), new UsersController(new UsersService())];
+  private controllers = [new CategoryController(new CategoryService()), new AuthController(new AuthService())];
 
   constructor() {
     this.initDatabase();

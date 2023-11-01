@@ -1,6 +1,5 @@
-import { check } from "express-validator";
+import { body } from "express-validator";
 
 export const createUserValidator = [
-
-    check('username').isString().withMessage('Username must be string'),
+    body('username').isEmail().withMessage('Username must be string'),
 ]

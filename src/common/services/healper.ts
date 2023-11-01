@@ -1,3 +1,5 @@
+import fs from "fs";
+
 export const errorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
 
@@ -23,3 +25,12 @@ const sendErrorProdMode = (err, res) => {
   });
 };
 
+export const fileExists = (fullPath) => {
+  const path = fullPath.split("/");
+
+  if (fs.existsSync(fullPath)) {
+    return true;
+  } else {
+    fs.mkdirSync(fullPath);
+  }
+};
